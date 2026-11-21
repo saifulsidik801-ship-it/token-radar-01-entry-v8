@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch Radar v8 — token launch radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Launch Radar <span class="v7">v8</span></h1>
+    <p class="headline">198 protocols record no token. Here is what each launch would be worth.</p>
+    <p class="sub">Ranked by implied value — value if it launches &times; launch odds.</p>
+  </div>
+  <div class="snap" id="snapLine">DefiLlama snapshot — model radar-7, refitted in this browser</div>
+</header>
+
+<section class="kpis" id="kpis"></section>
+
+<p class="formula" id="formulaLine"></p>
+
+<section class="controls">
+  <div class="tabs" id="tabs"></div>
+  <div class="ctl-row">
+    <input id="search" type="search" placeholder="Search name, chain, category" aria-label="Search protocols">
+    <select id="catSel" aria-label="Category"></select>
+    <select id="chainSel" aria-label="Chain"></select>
+    <select id="verdictSel" aria-label="Verdict">
+      <option value="">Any verdict</option><option value="0">Farm</option><option value="1">Marginal</option><option value="2">Skip</option>
+    </select>
+    <label>Deposit <select id="depositSel"></select></label>
+    <label>Drop share <select id="dropSel"></select></label>
+    <label>Horizon <select id="horizonSel"></select></label>
+    <button id="csvBtn" type="button">CSV</button>
+    <button id="jsonBtn" type="button">JSON</button>
+    <button id="resetBtn" type="button">Reset</button>
+  </div>
+  <div class="count-line"><span id="rowCount"></span><span id="sums"></span></div>
+</section>
+
+<section class="board-wrap">
+  <table class="board" id="boardTable">
+    <thead><tr id="boardHead"></tr></thead>
+    <tbody id="boardBody"></tbody>
+  </table>
+</section>
+
+<section class="detail" id="detail" hidden></section>
+
+<section class="scatter">
+  <h2>The fit, seen — log–log scatter</h2>
+  <div id="scatterBox"></div>
+  <p class="ev-note" id="scatterNote"></p>
+</section>
+
+<section class="ledger">
+  <div class="ledger-head"><h2>Protocol accounting</h2><span id="ledgerTotal"></span></div>
+  <div class="ledger-bar" id="ledgerBar"></div>
+  <div class="ledger-counts" id="ledgerCounts"></div>
+  <div class="integrity" id="integrity"></div>
+</section>
+
+<section class="evidence">
+  <div class="ev-col">
+    <h2>Out-of-sample evidence — value</h2>
+    <p class="ev-note">A term is kept only if it lowers the held-out miss in <b>both</b> tests: leave-one-out, and walk-forward (tokens listed earlier price those listed later). All 95 traded tokens with a usable cap and a listing date — no TVL band, so the hardest tokens stay in.</p>
+    <table id="valueTable"></table>
+  </div>
+  <div class="ev-col">
+    <h2>Token odds — Brier score</h2>
+    <p class="ev-note">Lower is better. Base rate is the older peers&rsquo; own token rate, applied to the newer peers. A peer is a protocol with a known listing date.</p>
+    <table id="oddsTable"></table>
+  </div>
+  <div class="ev-col">
+    <h2>Is the printed range honest?</h2>
+    <p class="ev-note">The P25&ndash;P75 and P10&ndash;P90 bands come from the held-out residuals, not from the fit. Walk-forward bands come from the older fit&rsquo;s residuals only.</p>
+    <table id="rangeTable"></table>
+    <p class="ev-note" id="rangeNote"></p>
+  </div>
+</section>
+
+<section class="plans">
+  <h2>Best farm plans by net / hour <span class="plans-sub" id="plansSub"></span></h2>
+  <ol id="bestPlans"></ol>
+</section>
+
+<section class="method">
+  <h2>Method — tested out of sample, not asserted</h2>
+  <div id="methodBody"></div>
+</section>
+
+<footer>Launch Radar v8. Snapshot: DefiLlama protocols, fetched 2026-11-14. A board&rsquo;s implied value is this entry&rsquo;s own claim, never make.fun&rsquo;s. It does not predict whether or when a token is issued.</footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
