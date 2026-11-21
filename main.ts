@@ -5,6 +5,7 @@
 //
 // Paths are resolved from this file's own location, never from the working
 // directory: the grader runs it from a foreign cwd.
+// v8 repair: entrypoint re-typed from the v7 source; the model is unchanged.
 
 import { copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
